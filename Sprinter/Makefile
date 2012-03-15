@@ -33,10 +33,10 @@
 # $Id$
 
 TARGET = $(notdir $(CURDIR))
-INSTALL_DIR = ../../arduino22/arduino-0022/
+INSTALL_DIR = /Applications/Arduino.app/Contents/Resources/Java
 UPLOAD_RATE = 38400
 AVRDUDE_PROGRAMMER = stk500v1
-PORT = /dev/ttyUSB0
+PORT = /dev/tty.usbmodemfa131
 MCU = atmega2560
 #For "old" Arduino Mega
 #MCU = atmega1280
@@ -49,7 +49,7 @@ F_CPU = 16000000
 # Below here nothing should be changed...
 
 ARDUINO = $(INSTALL_DIR)/hardware/arduino/cores/arduino
-AVR_TOOLS_PATH = /usr/bin
+AVR_TOOLS_PATH = /Applications/Arduino.app/Contents/Resources/Java/hardware/tools/avr/bin
 SRC =  $(ARDUINO)/pins_arduino.c $(ARDUINO)/wiring.c \
 $(ARDUINO)/wiring_analog.c $(ARDUINO)/wiring_digital.c \
 $(ARDUINO)/wiring_pulse.c \
@@ -97,7 +97,7 @@ LDFLAGS = -lm
 # Programming support using avrdude. Settings and variables.
 AVRDUDE_PORT = $(PORT)
 AVRDUDE_WRITE_FLASH = -U flash:w:applet/$(TARGET).hex:i
-AVRDUDE_FLAGS = -D -C $(INSTALL_DIR)/hardware/tools/avrdude.conf \
+AVRDUDE_FLAGS = -D -C $(INSTALL_DIR)/hardware/tools/avr/etc/avrdude.conf \
 -p $(MCU) -P $(AVRDUDE_PORT) -c $(AVRDUDE_PROGRAMMER) \
 -b $(UPLOAD_RATE)
 
@@ -109,7 +109,7 @@ OBJDUMP = $(AVR_TOOLS_PATH)/avr-objdump
 AR  = $(AVR_TOOLS_PATH)/avr-ar
 SIZE = $(AVR_TOOLS_PATH)/avr-size
 NM = $(AVR_TOOLS_PATH)/avr-nm
-AVRDUDE = $(INSTALL_DIR)/hardware/tools/avrdude
+AVRDUDE = $(AVR_TOOLS_PATH)/avrdude
 REMOVE = rm -f
 MV = mv -f
 
